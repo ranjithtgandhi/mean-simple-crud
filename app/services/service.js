@@ -1,0 +1,42 @@
+(function() {
+ 'use strict';
+ 
+ angular.module('app').factory('userService', Service);
+ 
+ Service.$inject = ['$http', 'globalConfig'];
+ 
+	function Service($http, globalConfig) {
+		var url = "";
+		return {
+			userRegister: function(user) {
+				url = globalConfig.apiAddress + "/register";
+				return $http.post(url, user);
+			},
+			userLogin: function(user) {
+				console.log(user);
+				url = globalConfig.apiAddress + "/login";
+				return $http.post(url, user);
+			},
+			getUsers: function() {
+				url = globalConfig.apiAddress + "/user";
+				return $http.get(url);
+			},
+			getUser: function(id) {
+				url = globalConfig.apiAddress + "/user/" + id;
+				return $http.get(url);
+			},
+			createUser: function(user) {
+				url = globalConfig.apiAddress + "/user";
+				return $http.post(url, user);
+			},
+			updateUser: function(user) {
+				url = globalConfig.apiAddress + "/user/" + user._id;
+				return $http.put(url, user);
+			},
+			deleteUser: function(id) {
+				url = globalConfig.apiAddress + "/user/" + id;
+				return $http.delete(url);
+			}														
+		};
+	}
+})();
